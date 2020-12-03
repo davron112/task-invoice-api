@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\Contracts\PaymentService as PaymentServiceInterface;
 use App\Services\Contracts\InvoiceService as InvoiceServiceInterface;
+use App\Services\Contracts\UserService as UserServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -33,6 +34,7 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(PaymentServiceInterface::class, \App\Services\PaymentService::class);
         $this->app->bind(InvoiceServiceInterface::class, \App\Services\InvoiceService::class);
+        $this->app->bind(UserServiceInterface::class, \App\Services\UserServiceService::class);
         //:end-bindings:
     }
 }
