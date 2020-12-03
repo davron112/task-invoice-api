@@ -37,4 +37,11 @@ class Invoice extends Model {
      * Completed status
      */
     const STATUS_COMPLETED = 'COMPLETED';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user() {
+        return $this->hasOne(User::class, 'id', 'payer_id');
+    }
 }

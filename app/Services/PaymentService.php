@@ -4,6 +4,7 @@ namespace App\Services;
 
 
 use App\Models\Payment;
+use App\Models\User;
 use App\Repositories\Abstracts\InvoiceRepository;
 use App\Repositories\Abstracts\PaymentRepository;
 use App\Repositories\Abstracts\UserRepository;
@@ -84,7 +85,8 @@ class PaymentService  extends BaseService implements PaymentServiceInterface
         try {
             /** @var Payment $payment */
             $payment = $this->repository->newInstance();
-            $user = $this->invoiceRepository->find(Arr::get($data, 'invoice_id'));
+            /** @var User $user */
+            $user = $this->invoiceRepository->find(Arr::get($data, 'invoice_id'))->user;
             if ($user->full_name != Arr::get($data, 'full_name')) {
                 $user->full_name = Arr::get($data, 'full_name');
                 $user->save();

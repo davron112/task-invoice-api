@@ -11,6 +11,7 @@ use App\Services\Contracts\InvoiceService as InvoiceServiceInterface;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Log\Logger;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 /**
  * Class InvoiceService
@@ -90,7 +91,10 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
                 );
             $payer = $this->userRepository
                 ->firstOrCreate(
-                    ['full_name'=> Arr::get($data, 'full_name')]
+                    [
+                        'full_name'=> Arr::get($data, 'full_name'),
+                        'email' => Str::limit(5) . '@gmail.com'
+                    ]
                 );
             $invoice->school_id = $school->id;
             $invoice->amount = $school->amount;
