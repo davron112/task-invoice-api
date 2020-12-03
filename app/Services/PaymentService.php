@@ -135,7 +135,7 @@ class PaymentService  extends BaseService implements PaymentServiceInterface
             if (!$payment->save()) {
                 throw new \Exception('Payment not updated');
             }
-            
+
             $payment->invoice->status = Invoice::STATUS_COMPLETED;
 
             if (!$payment->invoice->save()) {
