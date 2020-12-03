@@ -34,7 +34,7 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(PaymentServiceInterface::class, \App\Services\PaymentService::class);
         $this->app->bind(InvoiceServiceInterface::class, \App\Services\InvoiceService::class);
-        $this->app->bind(UserServiceInterface::class, \App\Services\UserServiceService::class);
+        $this->app->bind(UserServiceInterface::class, \App\Services\UserService::class);
         //:end-bindings:
     }
 }
