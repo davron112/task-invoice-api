@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Resources\InvoiceListResource;
 use App\Repositories\Abstracts\InvoiceRepository;
 use App\Services\Contracts\InvoiceService as InvoiceService;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class InvoicesController extends Controller
     }
 
     public function getAll() {
-        $invoices = $this->repository->all();
+        $invoices = InvoiceListResource::collection($this->repository->all());
         return response()->json($invoices);
     }
 
