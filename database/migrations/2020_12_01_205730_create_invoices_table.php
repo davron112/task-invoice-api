@@ -16,11 +16,13 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_number');
-            $table->bigInteger('total')->default(0);
+            $table->bigInteger('amount')->default(0);
             $table->string('status')->default('NEW');
             $table->string('link');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->on('users')->references('id');
+            $table->unsignedBigInteger('school_id');
+            $table->foreign('school_id')->on('schools')->references('id');
+            $table->unsignedBigInteger('payer_id');
+            $table->foreign('payer_id')->on('users')->references('id');
             $table->timestamps();
         });
     }
