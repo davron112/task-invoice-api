@@ -103,7 +103,7 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
             $this->paymentService->store([
                 'user_id' => Arr::get($data, 'user_id'),
                 'amount' => Arr::get($data, 'amount'),
-                'invoice_id' => Arr::get($data, 'invoice_id'),
+                'invoice_id' => $invoice->id
             ]);
           $this->logger->info('Invoice was successfully saved into database.');
         } catch (\Exception $e) {
