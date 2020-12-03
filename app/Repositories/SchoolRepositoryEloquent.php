@@ -2,9 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\Invoice;
 use App\Models\School;
-use App\Repositories\Abstracts\InvoiceRepository;
+use App\Repositories\Abstracts\SchoolRepository;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
@@ -12,7 +11,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
  * Class SchoolRepositoryEloquent
  * @package App\Repositories
  */
-class SchoolRepositoryEloquent extends BaseRepository implements InvoiceRepository
+class SchoolRepositoryEloquent extends BaseRepository implements SchoolRepository
 {
     /**
      * Specify Model class name
