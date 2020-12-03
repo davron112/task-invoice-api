@@ -42,29 +42,21 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
     protected $schoolRepository;
 
     /**
-     * @var UserRepository
-     */
-    protected $userRepository;
-
-    /**
      * InvoiceService constructor.
      * @param DatabaseManager $databaseManager
      * @param InvoiceRepository $repository
      * @param Logger $logger
      * @param SchoolRepository $schoolRepository
-     * @param UserRepository $userRepository
      */
     public function __construct(
         DatabaseManager $databaseManager,
         InvoiceRepository $repository,
         Logger $logger,
-        SchoolRepository $schoolRepository,
-        UserRepository $userRepository
+        SchoolRepository $schoolRepository
     ) {
 
         $this->databaseManager     = $databaseManager;
         $this->repository     = $repository;
-        $this->userRepository     = $userRepository;
         $this->schoolRepository     = $schoolRepository;
         $this->logger     = $logger;
     }
@@ -90,20 +82,11 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
                 ->firstOrCreate(
                     ['name'=> Arr::get($data, 'school_name')]
                 );
-            $payer = $this->userRepository
-                ->firstOrCreate(
-                    [
-                        'full_name'=> Arr::get($data, 'full_name'),
-                        'email' => Str::random(5) . '@gmail.com',
-                        'password' => Hash::make('Password123'),
-                    ]
-                );
             $invoice->school_id = $school->id;
             $invoice->amount = Arr::get($data, 'amount', 0);
             $invoice->link = Str::random(7);
             $invoice->invoice_number = rand(1111, 9999);
             $invoice->status = Invoice::STATUS_NEW;
-            $invoice->payer_id = $payer->id;
 
             if ($invoice->save()) {
                 throw new \Exception('Invoice not created');

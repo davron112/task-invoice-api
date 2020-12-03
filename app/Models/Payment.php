@@ -33,4 +33,11 @@ class Payment extends Model {
         'invoice_id',
         'payer_id'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user() {
+        return $this->hasOne(User::class, 'id', 'payer_id');
+    }
 }

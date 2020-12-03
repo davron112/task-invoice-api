@@ -24,8 +24,7 @@ class Invoice extends Model {
         'school_id',
         'invoice_number',
         'status',
-        'link',
-        'payer_id'
+        'link'
     ];
 
     /**
@@ -38,10 +37,4 @@ class Invoice extends Model {
      */
     const STATUS_COMPLETED = 'COMPLETED';
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function user() {
-        return $this->hasOne(User::class, 'id', 'payer_id');
-    }
 }
