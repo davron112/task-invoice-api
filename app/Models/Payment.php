@@ -28,7 +28,6 @@ class Payment extends Model {
      */
     protected $fillable = [
         'amount',
-        'description',
         'status',
         'invoice_id',
         'payer_id'

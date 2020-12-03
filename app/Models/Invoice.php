@@ -12,20 +12,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer invoice_number
  * @property integer payer_id
  * @property string status
+ * @property string description
  * @property string link
  */
 class Invoice extends Model {
-
-    /**
-     * @var string[]
-     */
-    protected $fillable = [
-        'amount',
-        'school_id',
-        'invoice_number',
-        'status',
-        'link'
-    ];
 
     /**
      * New invoice
@@ -37,4 +27,23 @@ class Invoice extends Model {
      */
     const STATUS_COMPLETED = 'COMPLETED';
 
+    /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'amount',
+        'description',
+        'school_id',
+        'invoice_number',
+        'status',
+        'link'
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function school() {
+
+        return $this->hasOne(School::class, 'id', 'school_id');
+    }
 }
