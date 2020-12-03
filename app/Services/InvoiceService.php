@@ -94,12 +94,13 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
                 ->firstOrCreate(
                     [
                         'full_name'=> Arr::get($data, 'full_name'),
-                        'email' => Str::limit(5) . '@gmail.com',
+                        'email' => Str::random(5) . '@gmail.com',
                         'password' => Hash::make('Password123'),
                     ]
                 );
             $invoice->school_id = $school->id;
             $invoice->amount = Arr::get($data, 'amount', 0);
+            $invoice->link = Str::random(7);
             $invoice->invoice_number = rand(1111, 9999);
             $invoice->status = Invoice::STATUS_NEW;
             $invoice->payer_id = $payer->id;
