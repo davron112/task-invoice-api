@@ -13,7 +13,8 @@ use Illuminate\Log\Logger;
 use Illuminate\Support\Arr;
 
 /**
- * @method bool destroy
+ * Class PaymentService
+ * @package App\Services
  */
 class PaymentService  extends BaseService implements PaymentServiceInterface
 {

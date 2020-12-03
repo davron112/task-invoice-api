@@ -2,13 +2,17 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Arr;
-use Prettus\Repository\Eloquent\BaseRepository as Repository;
 use Exception;
-use Illuminate\Database\DatabaseManager;
-use Illuminate\Http\Response;
 use Illuminate\Log\Logger;
+use Illuminate\Support\Arr;
+use Illuminate\Http\Response;
+use Illuminate\Database\DatabaseManager;
+use Prettus\Repository\Eloquent\BaseRepository;
 
+/**
+ * Class BaseService
+ * @package App\Services
+ */
 abstract class BaseService
 {
     /**
@@ -32,7 +36,7 @@ abstract class BaseService
     protected $message;
 
     /**
-     * @var Repository
+     * @var BaseRepository
      */
     protected $repository;
 
@@ -41,13 +45,10 @@ abstract class BaseService
      *
      * @param DatabaseManager $databaseManager
      * @param Logger $logger
-     * @param Repository $repository
+     * @param BaseRepository $repository
      */
-    public function __construct(
-        DatabaseManager $databaseManager,
-        Logger $logger,
-        Repository $repository
-    ) {
+    public function __construct(DatabaseManager $databaseManager, Logger $logger, BaseRepository $repository)
+    {
         $this->databaseManager = $databaseManager;
         $this->logger          = $logger;
         $this->repository      = $repository;
@@ -79,11 +80,9 @@ abstract class BaseService
         $this->logError($e, $message, $context);
 
         $status = $e->getCode();
+        if (!app()->environment(['production', 'prod'])) $message = $e->getMessage();
 
-        if (Arr::get(Response::$statusTexts, $status))
-        {
-            if (!app()->environment(['production', 'prod'])) $message = $e->getMessage();
-        } else {
+        if (!Arr::get(Response::$statusTexts, $status)) {
             $status = Response::HTTP_INTERNAL_SERVER_ERROR;
         }
 
