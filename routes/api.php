@@ -29,5 +29,12 @@ Route::group([
     'prefix'    => 'payments'
 ], function () {
     Route::get('/', [\App\Http\Controllers\PaymentsController::class, 'getAll']);
-    Route::post('/update', [\App\Http\Controllers\PaymentsController::class, 'addPayment']);
+    Route::post('/create', [\App\Http\Controllers\PaymentsController::class, 'addPayment']);
+});
+
+Route::group([
+    'prefix'    => 'users'
+], function () {
+    Route::get('/', [\App\Http\Controllers\UsersController::class, 'getAll']);
+    Route::post('/create', [\App\Http\Controllers\UsersController::class, 'create']);
 });
