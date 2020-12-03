@@ -36,7 +36,7 @@ class UsersController extends Controller
     }
 
     public function getAll() {
-        $invoices = UserListResource::collection($this->repository->all());
+        $invoices = $this->repository->all();
         return response()->json($invoices);
     }
 
