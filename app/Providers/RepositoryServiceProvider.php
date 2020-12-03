@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use ;
 use App\Services\Contracts\PaymentService as PaymentServiceInterface;
 use App\Services\Contracts\InvoiceService as InvoiceServiceInterface;
 use Illuminate\Support\ServiceProvider;
