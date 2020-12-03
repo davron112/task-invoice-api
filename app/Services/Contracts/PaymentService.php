@@ -14,4 +14,11 @@ interface PaymentService extends BaseService
      * @param array $data
      */
     public function store(array $data);
+
+    /**
+     * @param array $data
+     * @param $id
+     * @return mixed
+     */
+    public function update(array $data, $id);
 }

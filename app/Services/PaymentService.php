@@ -91,12 +91,51 @@ class PaymentService  extends BaseService implements PaymentServiceInterface
                 $user->full_name = Arr::get($data, 'full_name');
                 $user->save();
             }
+            $payment->amount = Arr::get($data, 'amount');
             $payment->payer_id = $user->id;
-            $payment->status = Payment::STATUS_PAYED;
+            $payment->status = Payment::STATUS_UNPAID;
             $payment->invoice_id = Arr::get($data, 'invoice_id');
 
             if (!$payment->save()) {
-                throw new \Exception(["type" => "error","message" => "cart is empty"]);
+                throw new \Exception('Payment not created');
+            }
+
+          $this->logger->info('Payment was successfully saved into database.');
+        } catch (\Exception $e) {
+            $this->rollback($e, 'An error occurred while storing an ', [
+                'data' => $data,
+            ]);
+        }
+
+        $this->commit();
+
+        return $payment;
+    }
+
+    /**
+     * @param array $data
+     * @param $id
+     * @return Payment
+     * @throws \Exception
+     */
+    public function update(array $data, $id)
+    {
+
+        $this->beginTransaction();
+
+        try {
+            /** @var Payment $payment */
+            $payment = $this->repository->find($id);
+            /** @var User $user */
+            $user = User::find($payment->payer_id);
+            if ($user->full_name != Arr::get($data, 'full_name')) {
+                $user->full_name = Arr::get($data, 'full_name');
+                $user->save();
+            }
+            $payment->status = Payment::STATUS_PAYED;
+
+            if (!$payment->save()) {
+                throw new \Exception('Payment not updated');
             }
 
           $this->logger->info('Payment was successfully saved into database.');
