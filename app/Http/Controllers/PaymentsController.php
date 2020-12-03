@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Abstracts\PaymentRepository;
-use App\Services\PaymentService;
+use App\Services\Contracts\PaymentService as PaymentService;
 use Illuminate\Http\Request;
 
 /**
