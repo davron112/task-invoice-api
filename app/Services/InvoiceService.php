@@ -111,7 +111,7 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
 
           $this->logger->info('Invoice was successfully saved into database.');
         } catch (\Exception $e) {
-            $this->rollback($e, 'An error occurred while storing an ', [
+            $this->rollback($e, $e->getMessage(), [
                 'data' => $data,
             ]);
         }
