@@ -77,7 +77,7 @@ abstract class BaseService
     protected function rollback(Exception $e, $message = '', $context = [])
     {
         $this->databaseManager->rollBack();
-        $this->logError($e, $message, $context);
+        $this->logError($e, $e->getMessage(), $context);
 
         $status = $e->getCode();
         if (!app()->environment(['production', 'prod'])) $message = $e->getMessage();
