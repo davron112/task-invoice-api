@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PaymentListResource;
 use App\Repositories\Abstracts\PaymentRepository;
 use App\Services\Contracts\PaymentService as PaymentService;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class PaymentsController extends Controller
     }
 
     public function getAll() {
-        $invoices = $this->repository->all();
+        $invoices = PaymentListResource::collection($this->repository->all());
         return response()->json($invoices);
     }
 
