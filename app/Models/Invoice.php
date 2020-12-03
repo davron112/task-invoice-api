@@ -34,6 +34,7 @@ class Invoice extends Model {
         'amount',
         'description',
         'school_id',
+        'payer_id',
         'invoice_number',
         'status',
         'link'

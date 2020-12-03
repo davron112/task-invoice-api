@@ -87,6 +87,7 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
             $invoice->description = Arr::get($data, 'description', '');
             $invoice->link = Str::random(7);
             $invoice->invoice_number = rand(1111, 9999);
+            $invoice->payer_id = Arr::get($data, 'payer_id');
             $invoice->status = Invoice::STATUS_NEW;
 
             if (!$invoice->save()) {
