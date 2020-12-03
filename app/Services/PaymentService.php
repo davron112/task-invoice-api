@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+use App\Models\Invoice;
 use App\Models\Payment;
 use App\Models\User;
 use App\Repositories\Abstracts\InvoiceRepository;
@@ -130,8 +131,15 @@ class PaymentService  extends BaseService implements PaymentServiceInterface
             }
             $payment->status = Payment::STATUS_PAYED;
 
+
             if (!$payment->save()) {
                 throw new \Exception('Payment not updated');
+            }
+            
+            $payment->invoice->status = Invoice::STATUS_COMPLETED;
+
+            if (!$payment->invoice->save()) {
+                throw new \Exception('Invoice status not updated');
             }
 
           $this->logger->info('Payment was successfully saved into database.');
