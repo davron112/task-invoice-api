@@ -11,6 +11,7 @@ use App\Services\Contracts\InvoiceService as InvoiceServiceInterface;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Log\Logger;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -93,7 +94,8 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
                 ->firstOrCreate(
                     [
                         'full_name'=> Arr::get($data, 'full_name'),
-                        'email' => Str::limit(5) . '@gmail.com'
+                        'email' => Str::limit(5) . '@gmail.com',
+                        'password' => Hash::make('Password123'),
                     ]
                 );
             $invoice->school_id = $school->id;
