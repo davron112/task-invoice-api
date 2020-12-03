@@ -15,20 +15,4 @@ interface InvoiceService extends BaseService
      * @param array $data
      */
     public function store(array $data);
-
-    /**
-     * Update block in the storage.
-     *
-     * @param  int  $id
-     * @param  array  $data
-     */
-    public function update($id, array $data);
-
-    /**
-     * Update block in the storage.
-     *
-     * @param  int  $id
-     * @return array
-     */
-    public function delete($id);
 }
