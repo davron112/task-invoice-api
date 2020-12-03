@@ -89,7 +89,7 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
             $invoice->invoice_number = rand(1111, 9999);
             $invoice->status = Invoice::STATUS_NEW;
 
-            if ($invoice->save()) {
+            if (!$invoice->save()) {
                 throw new \Exception('Invoice not created');
             }
 

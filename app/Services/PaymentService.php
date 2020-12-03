@@ -95,7 +95,7 @@ class PaymentService  extends BaseService implements PaymentServiceInterface
             $payment->status = Payment::STATUS_PAYED;
             $payment->invoice_id = Arr::get($data, 'invoice_id');
 
-            if ($payment->save()) {
+            if (!$payment->save()) {
                 throw new \Exception(["type" => "error","message" => "cart is empty"]);
             }
 
