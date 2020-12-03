@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Abstracts\InvoiceRepository;
-use App\Services\InvoiceService;
+use App\Services\Contracts\InvoiceService as InvoiceService;
 use Illuminate\Http\Request;
 
 /**

@@ -8,13 +8,9 @@ use App\Repositories\Abstracts\InvoiceRepository;
 use App\Repositories\Abstracts\SchoolRepository;
 use App\Repositories\Abstracts\UserRepository;
 use App\Services\Contracts\InvoiceService as InvoiceServiceInterface;
-use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Log\Logger;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 /**
  * @method bool destroy
