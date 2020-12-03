@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Repositories\Abstracts\PaymentRepository;
 use App\Services\PaymentService;
 use Illuminate\Http\Request;
 
@@ -16,12 +17,27 @@ class PaymentsController extends Controller
     protected $paymentService;
 
     /**
-     * PaymentsController constructor.
-     * @param PaymentService $paymentService
+     * @var PaymentRepository
      */
-    public function __construct(PaymentService $paymentService)
-    {
+    protected $repository;
+
+    /**
+     * PaymentsController constructor.
+     *
+     * @param PaymentService $paymentService
+     * @param PaymentRepository $repository
+     */
+    public function __construct(
+        PaymentService $paymentService,
+        PaymentRepository $repository
+    ) {
         $this->paymentService = $paymentService;
+        $this->repository = $repository;
+    }
+
+    public function getAll() {
+        $invoices = $this->repository->all();
+        return response()->json($invoices);
     }
 
     /**
