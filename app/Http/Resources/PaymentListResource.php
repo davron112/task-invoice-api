@@ -18,7 +18,7 @@ class PaymentListResource extends JsonResource
         return [
             'id' => $this->id,
             'amount' => $this->amount,
-            'description' => $this->invoice->description,
+            'description' => $this->invoice ? $this->invoice->description : '',
             'school_name' => $this->invoice ? $this->invoice->school->name : '',
             'status' => $this->status
         ];
