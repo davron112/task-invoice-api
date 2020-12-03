@@ -51,16 +51,16 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
      * InvoiceService constructor.
      * @param DatabaseManager $databaseManager
      * @param InvoiceRepository $repository
+     * @param Logger $logger
      * @param SchoolRepository $schoolRepository
      * @param UserRepository $userRepository
-     * @param Logger $logger
      */
     public function __construct(
         DatabaseManager $databaseManager,
         InvoiceRepository $repository,
+        Logger $logger,
         SchoolRepository $schoolRepository,
-        UserRepository $userRepository,
-        Logger $logger
+        UserRepository $userRepository
     ) {
 
         $this->databaseManager     = $databaseManager;
@@ -96,7 +96,6 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
                     ['full_name'=> Arr::get($data, 'full_name')]
                 );
             $invoice->school_id = $school->id;
-            $invoice->user_id = $school->id;
             $invoice->amount = $school->amount;
             $invoice->invoice_number = rand(1111, 9999);
             $invoice->status = Invoice::STATUS_NEW;
