@@ -77,7 +77,7 @@ class InvoicesController extends Controller
             $message = "Send";
         } catch (\Exception $e) {
             $status = false;
-            $message = "Error";
+            $message = $e->getMessage();
         }
         return response()->json([
             'status' => $status,
