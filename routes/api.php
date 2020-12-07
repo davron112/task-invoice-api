@@ -23,6 +23,8 @@ Route::group([
 ], function () {
     Route::get('/', [\App\Http\Controllers\InvoicesController::class, 'getAll']);
     Route::post('/create', [\App\Http\Controllers\InvoicesController::class, 'create']);
+    Route::post('/link/{link}', [\App\Http\Controllers\InvoicesController::class, 'show']);
+    Route::post('/send', [\App\Http\Controllers\InvoicesController::class, 'send']);
 });
 
 Route::group([

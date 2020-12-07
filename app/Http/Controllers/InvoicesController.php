@@ -38,8 +38,20 @@ class InvoicesController extends Controller
         $this->repository = $repository;
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getAll() {
         $invoices = InvoiceListResource::collection($this->repository->all());
+        return response()->json($invoices);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(Request $request) {
+        $invoices = $this->repository->where('link', $request->link)->first();
         return response()->json($invoices);
     }
 
