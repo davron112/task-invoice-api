@@ -25,7 +25,7 @@ class Invoice extends Model {
     /**
      * Completed status
      */
-    const STATUS_COMPLETED = 'COMPLETED';
+    const STATUS_COMPLETED = 'PAID';
 
     /**
      * @var string[]
