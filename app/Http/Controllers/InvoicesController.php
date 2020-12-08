@@ -58,7 +58,7 @@ class InvoicesController extends Controller
         $invoice = $this->repository
             ->where('link', $request->link)
             ->first();
-        return response()->json($invoice);
+        return response()->json(new InvoiceListResource($invoice));
     }
 
     /**
