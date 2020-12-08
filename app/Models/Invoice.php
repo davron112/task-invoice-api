@@ -48,10 +48,10 @@ class Invoice extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function payment() {
 
-        return $this->belongsTo(Payment::class, 'invoice_id', 'id');
+        return $this->hasOne(Payment::class, 'invoice_id', 'id');
     }
 }
