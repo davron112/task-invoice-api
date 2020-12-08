@@ -22,8 +22,6 @@ class CreateInvoicesTable extends Migration
             $table->string('link');
             $table->unsignedBigInteger('school_id');
             $table->foreign('school_id')->on('schools')->references('id');
-            $table->unsignedBigInteger('payer_id');
-            $table->foreign('payer_id')->on('users')->references('id');
             $table->timestamps();
         });
     }

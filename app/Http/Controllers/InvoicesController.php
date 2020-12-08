@@ -39,6 +39,8 @@ class InvoicesController extends Controller
     }
 
     /**
+     * Get all invoices
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getAll() {
@@ -47,41 +49,28 @@ class InvoicesController extends Controller
     }
 
     /**
+     * Show detail by link
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Request $request) {
-        $invoices = $this->repository->where('link', $request->link)->first();
-        return response()->json($invoices);
-    }
-
-    /**
-     * @param Request $request
-     */
-    public function create(Request $request) {
-        $data = $request->all();
-        $invoice = $this->service->store($data);
+        $invoice = $this->repository
+            ->where('link', $request->link)
+            ->first();
         return response()->json($invoice);
     }
 
     /**
+     * Create a new invoice
+     *
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function send(Request $request) {
-        try {
-            $data = $request->all();
-            $email = Arr::get($data, 'email');
-            $invoice = $this->repository->find(Arr::get($data, 'invoice_id'));
-            Mail::to($email)->send(new InvoiceSend($invoice));
-            $status = true;
-            $message = "Send";
-        } catch (\Exception $e) {
-            $status = false;
-            $message = $e->getMessage();
-        }
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-        ]);
+    public function create(Request $request) {
+        $data = $request->all();
+        $invoice = $this->service
+            ->store($data);
+        return response()->json($invoice);
     }
 }

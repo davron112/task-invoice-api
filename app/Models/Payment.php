@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer amount
  * @property string description
  * @property integer status
- * @property integer payer_id
+ * @property integer full_name
  * @property integer invoice_id
  */
 class Payment extends Model {
@@ -30,15 +30,8 @@ class Payment extends Model {
         'amount',
         'status',
         'invoice_id',
-        'payer_id'
+        'full_name'
     ];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function user() {
-        return $this->hasOne(User::class, 'id', 'payer_id');
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

@@ -87,9 +87,7 @@ class PaymentService  extends BaseService implements PaymentServiceInterface
             /** @var Payment $payment */
             $payment = $this->repository->newInstance();
             /** @var User $user */
-            $user = User::find(Arr::get($data, 'user_id'));
             $payment->amount = Arr::get($data, 'amount');
-            $payment->payer_id = $user->id;
             $payment->status = Payment::STATUS_UNPAID;
             $payment->invoice_id = Arr::get($data, 'invoice_id');
 
@@ -123,12 +121,8 @@ class PaymentService  extends BaseService implements PaymentServiceInterface
         try {
             /** @var Payment $payment */
             $payment = $this->repository->find($id);
-            /** @var User $user */
-            $user = User::find($payment->payer_id);
-            if ($user->full_name != Arr::get($data, 'full_name')) {
-                $user->full_name = Arr::get($data, 'full_name');
-                $user->save();
-            }
+
+            $payment->full_name = Arr::get($data, 'full_name');
             $payment->status = Payment::STATUS_PAYED;
 
 

@@ -21,7 +21,7 @@ class InvoiceListResource extends JsonResource
             'invoice_number' => $this->invoice_number,
             'description' => $this->description,
             'school_name' => $this->school ? $this->school->name : '',
-            'full_name' => $this->user ? $this->user->full_name : '',
+            'full_name' => $this->payment ? $this->payment->full_name : '',
             'status' => $this->status,
             'link' => config('app.url'). "/" . $this->link,
         ];

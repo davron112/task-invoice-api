@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+use App\Mail\InvoiceSend;
 use App\Models\Invoice;
 use App\Repositories\Abstracts\InvoiceRepository;
 use App\Repositories\Abstracts\SchoolRepository;
@@ -10,6 +11,7 @@ use App\Services\Contracts\InvoiceService as InvoiceServiceInterface;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Log\Logger;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Services\Contracts\PaymentService;
 
@@ -94,17 +96,16 @@ class InvoiceService  extends BaseService implements InvoiceServiceInterface
             $invoice->description = Arr::get($data, 'description', '');
             $invoice->link = Str::random(7);
             $invoice->invoice_number = rand(1111, 9999);
-            $invoice->payer_id = Arr::get($data, 'user_id');
             $invoice->status = Invoice::STATUS_NEW;
 
             if (!$invoice->save()) {
                 throw new \Exception('Invoice not created');
             }
             $this->paymentService->store([
-                'user_id' => Arr::get($data, 'user_id'),
                 'amount' => Arr::get($data, 'amount'),
                 'invoice_id' => $invoice->id
             ]);
+            Mail::to(Arr::get($data, 'email'))->send(new InvoiceSend($invoice));
           $this->logger->info('Invoice was successfully saved into database.');
         } catch (\Exception $e) {
             $this->rollback($e, $e->getMessage(), [

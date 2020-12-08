@@ -34,7 +34,6 @@ class Invoice extends Model {
         'amount',
         'description',
         'school_id',
-        'payer_id',
         'invoice_number',
         'status',
         'link'
@@ -46,13 +45,5 @@ class Invoice extends Model {
     public function school() {
 
         return $this->hasOne(School::class, 'id', 'school_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function user() {
-
-        return $this->hasOne(User::class, 'id', 'payer_id');
     }
 }
