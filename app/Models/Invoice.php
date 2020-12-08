@@ -46,4 +46,12 @@ class Invoice extends Model {
 
         return $this->hasOne(School::class, 'id', 'school_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function payment() {
+
+        return $this->belongsTo(Payment::class, 'invoice_id', 'id');
+    }
 }
